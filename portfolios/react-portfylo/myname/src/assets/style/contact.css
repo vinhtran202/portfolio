@@ -1,0 +1,93 @@
+.contact {
+  margin: 0 auto;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+}
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+}
+.contact-image {
+  width: 50%;
+  height: 100;
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  margin-bottom: 10px;
+}
+
+.contact-content {
+  width: 50%;
+  padding: 64px;
+}
+
+.contact-title {
+  color: #000;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+}
+
+.contact-title h2 {
+  font-size: 40px;
+  line-height: 1.5;
+  font-weight: 400;
+
+  margin: 0 0 20px 0;
+}
+
+.contact-title form #name {
+  display: flex;
+  flex-direction: row;
+  width: 51%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.contact-title form #email-subject {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.contact-title form #message {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.contact-title form button {
+  width: 100%;
+  background-color: #ff9000;
+  color: #fff;
+  padding: 14px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.contact-title form button:hover {
+  background-color: #ff910093;
+  color: #000;
+  transition: all 0.5s ease-in-out;
+}

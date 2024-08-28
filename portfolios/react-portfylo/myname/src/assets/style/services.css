@@ -1,0 +1,73 @@
+.services {
+  background: #ff9000;
+}
+.container-services {
+  padding: 112px 0px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 1170px;
+  text-align: center;
+}
+
+.container-services .title-services {
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 40px;
+  color: #fff;
+  font-family: "Space Mono", monospace;
+  margin-bottom: 127px;
+  padding: 20px 0;
+}
+
+.container-services .services-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-items: flex-start;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.container-services .services-wrapper .services-card {
+  width: 33.333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #fff;
+  font-family: "Space Mono", monospace;
+}
+
+.container-services .services-wrapper .services-card .services-logo {
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 50px;
+}
+
+.container-services .services-wrapper .services-card .services-title h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.container-services .services-wrapper .services-card .services-description {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}

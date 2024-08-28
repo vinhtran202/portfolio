@@ -1,0 +1,138 @@
+/* Container chính cho Resume */
+.resumeContainer {
+  padding: 7em 0;
+  margin: 0 auto;
+  font-family: "Space Mono", Arial, serif;
+}
+
+/* Tiêu đề chính của Resume */
+.resumeTitle {
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 40px;
+  color: #000;
+  font-family: "Space Mono", monospace;
+  margin-bottom: 127px;
+}
+
+/* Subtitle của mỗi phần */
+.subtitle {
+  position: relative;
+  padding: 20px 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle h3 {
+  display: inline-block;
+  padding: 7px 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bold;
+  background: #e6e6e6;
+  border-radius: 4px;
+}
+
+/* Timeline chính */
+.resumeTimeline {
+  position: relative;
+  padding: 20px 0;
+  list-style: none;
+  margin: 0;
+}
+
+.resumeTimeline:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #e6e6e6;
+  transform: translateX(-50%);
+}
+
+.resumeTimeline li {
+  position: relative;
+  width: 50%;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+
+.resumeTimeline li:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.resumeTimeline li:nth-child(odd) .timeline-badge {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 44px;
+  height: 44px;
+  background-color: #ff9000;
+  border-radius: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resumeTimeline li:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.resumeTimeline li:nth-child(even) .timeline-badge {
+  position: absolute;
+  top: 50%;
+  right: calc(100% - 44px);
+  width: 44px;
+  height: 44px;
+  background-color: #ff9000;
+  border-radius: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-panel {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-panel h3 {
+  font-weight: 400;
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.timeline-panel .company {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #bfbfbf;
+}
+
+.timeline-panel p {
+  margin: 0;
+}
+
+/* Khoảng cách giữa các dòng */
+.resumeTimeline li:nth-child(odd) .timeline-panel {
+  margin-right: 40px;
+}
+
+.resumeTimeline li:nth-child(even) .timeline-panel {
+  margin-left: 40px;
+}

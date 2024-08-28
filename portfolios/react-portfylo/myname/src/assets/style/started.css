@@ -1,0 +1,64 @@
+.started {
+  background: #ff9000;
+}
+.started-container {
+  padding: 7em 0;
+  color: #fff;
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.started-title {
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 40px;
+  margin-bottom: 127px;
+}
+
+.started-description {
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 127px;
+}
+
+.started-button {
+  text-align: center;
+}
+
+.started-button button {
+  padding: 10px 20px;
+  font-size: large;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  color: #ff9000;
+  transition: 0.5s;
+  border-radius: 50px;
+}
+
+.started-button button a {
+  height: 54px;
+  border: none !important;
+  background: transparent;
+  color: #ff9000;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.started-button button:hover {
+  background: #ffffff57;
+}
+
+.started-button button:hover > a {
+  color: #ffffff;
+  transition: all 0.5s ease-in;
+}
