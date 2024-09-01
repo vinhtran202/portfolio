@@ -1,10 +1,17 @@
 export default function Footer() {
   return (
-    <div className=" text-[#e0e0e0] py-8">
-      <div className="max-w-screen-xl mx-auto px-4 text-center">
-        <p className="text-sm mb-2">© 2024 created by Vinhtran</p>
-        <p className="text-sm">Designed by Vinhtran</p>
+    <section className="py-2 clear-both font mt-10">
+      <div className="mx-auto px-4 w-full max-w-5xl text-center font-mono">
+        <div className="text-center  font-normal text-xl text-black mb-10">
+          <p>Copyright &copy; 2021. All Rights Reserved.</p>
+          <p>
+            Powered by{" "}
+            <a href="https://www.reactjs.org/" className="text-[#ff9000]">
+              React
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

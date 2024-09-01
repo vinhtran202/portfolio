@@ -1,3 +1,5 @@
+import { useSpring, animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
 import BlogCard from "./BlogCard";
 
 export default function Blog() {
@@ -34,24 +36,41 @@ export default function Blog() {
     },
   ];
 
+  // Use Intersection Observer to trigger animation when 50% of the component is in view
+  const { ref, inView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the component is visible
+  });
+
+  // Define animation spring
+  const fadeInUp = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0px)" : "translateY(50px)",
+    config: {
+      tension: 200,
+      friction: 20,
+    },
+  });
+
   return (
-    <div className="w-full min-h-screen bg-white text-black text-lg font-normal py-[112px] px-4 max-w-[1170px] mx-auto">
-      <div className="text-center">
-        <div className="text-4xl font-mono text-black mb-5">
-          <h1>Post on Medium</h1>
-        </div>
-        <div className="max-w-[750px] mx-auto mb-[127px] text-xl leading-6 text-gray-500">
-          <p>
-            Dignissimos asperiores vitae velit veniam totam fuga molestias
-            accusamus alias autem provident...
-          </p>
-        </div>
-        <div className="flex justify-center flex-wrap gap-7">
-          {blogPosts.map((post, index) => (
-            <BlogCard key={index} {...post} />
-          ))}
+    <animated.div ref={ref} style={fadeInUp}>
+      <div className="w-full min-h-screen bg-white text-black text-lg font-normal py-[112px] px-4 max-w-[1170px] mx-auto">
+        <div className="text-center">
+          <div className="text-4xl font-mono text-black mb-5">
+            <h1>Post on Medium</h1>
+          </div>
+          <div className="max-w-[750px] mx-auto mb-[127px] text-xl leading-6 text-gray-500">
+            <p>
+              Dignissimos asperiores vitae velit veniam totam fuga molestias
+              accusamus alias autem provident...
+            </p>
+          </div>
+          <div className="flex justify-center flex-wrap gap-7">
+            {blogPosts.map((post, index) => (
+              <BlogCard key={index} {...post} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 }

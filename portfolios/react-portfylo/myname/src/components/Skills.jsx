@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
+import { useSpring, animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
 
 const skills = [
   { id: "html5", label: "HTML5", percentage: 35 },
@@ -97,16 +99,38 @@ export default function Skills() {
     };
   }, []);
 
+  // Use Intersection Observer to trigger animation when 50% of the component is in view
+  const { ref, inView } = useInView({
+    threshold: 0.5, // 50% of the component's visibility triggers the animation
+  });
+
+  // Define animation spring
+  const fadeInUp = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0px)" : "translateY(50px)",
+    config: {
+      tension: 200,
+      friction: 20,
+    },
+  });
+
   return (
-    <section className="py-28 clear-both font">
+    <section ref={ref} className="py-28 clear-both font">
       <div className="mx-auto px-4 w-full max-w-5xl text-center font-mono">
-        <div className="text-center leading-[1.5] font-normal text-4xl text-black mb-32">
+        <animated.div
+          className="text-center leading-[1.5] font-normal text-4xl text-black mb-32"
+          style={fadeInUp}
+        >
           <h1>Skills</h1>
-        </div>
+        </animated.div>
 
         <div className="flex flex-wrap justify-center items-center">
-          {skills.map((skill) => (
-            <div
+          {skills.map((skill, index) => (
+            <animated.div
+              style={{
+                ...fadeInUp,
+                delay: index * 100, // Add a delay for each skill item
+              }}
               className="w-1/4 px-5 text-center flex flex-col justify-center items-center mb-5 relative"
               key={skill.id}
             >
@@ -116,11 +140,21 @@ export default function Skills() {
               <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-normal text-black">
                 <strong>{skill.label}</strong> <br /> {skill.percentage}%
               </span>
-            </div>
+            </animated.div>
           ))}
-          <div className="grid grid-cols-2 gap-5 w-full mt-5 p-5">
-            {lineChartData.map((data) => (
-              <div className="p-5 mb-2" key={data.id}>
+          <animated.div
+            style={fadeInUp}
+            className="grid grid-cols-2 gap-5 w-full mt-5 p-5"
+          >
+            {lineChartData.map((data, index) => (
+              <animated.div
+                style={{
+                  ...fadeInUp,
+                  delay: (skills.length + index) * 100, // Stagger animations
+                }}
+                className="p-5 mb-2"
+                key={data.id}
+              >
                 <div className="flex justify-between mb-2">
                   <p className="font-normal">{data.label}</p>
                   <p className="font-normal">{data.percentage}%</p>
@@ -128,9 +162,9 @@ export default function Skills() {
                 <div className="w-full h-[3px] bg-gray-100">
                   <canvas id={data.id} width="300" height="40"></canvas>
                 </div>
-              </div>
+              </animated.div>
             ))}
-          </div>
+          </animated.div>
         </div>
       </div>
     </section>

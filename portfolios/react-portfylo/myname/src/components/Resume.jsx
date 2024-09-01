@@ -1,88 +1,42 @@
 import { FaHatCowboy, FaSuitcase } from "react-icons/fa";
 import { useSpring, animated } from "@react-spring/web";
-import { useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function Resume() {
-  const resumeTitleRef = useRef(null);
-  const workTimelineRef = useRef(null);
-  const educationTimelineRef = useRef(null);
+  const { ref: resumeTitleRef, inView: resumeTitleInView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the element is visible
+  });
+  const { ref: workTimelineRef, inView: workTimelineInView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the element is visible
+  });
+  const { ref: educationTimelineRef, inView: educationTimelineInView } =
+    useInView({
+      threshold: 0.5, // Trigger when 50% of the element is visible
+    });
 
-  const [resumeTitleStyle, resumeTitleApi] = useSpring(() => ({
-    opacity: 0,
-    transform: "translateY(20px)",
-    config: {
-      tension: 120,
-      friction: 14,
-      duration: 1000,
-    },
-  }));
+  // Animation for the resume title
+  const resumeTitleStyle = useSpring({
+    opacity: resumeTitleInView ? 1 : 0,
+    transform: resumeTitleInView ? "translateY(0px)" : "translateY(20px)",
+    config: { tension: 120, friction: 14 },
+  });
 
-  const [workTimelineStyle, workTimelineApi] = useSpring(() => ({
-    opacity: 0,
-    transform: "translateY(20px)",
-    config: {
-      tension: 120,
-      friction: 14,
-      duration: 1000,
-    },
-  }));
+  // Animation for the work timeline
+  const workTimelineStyle = useSpring({
+    opacity: workTimelineInView ? 1 : 0,
+    transform: workTimelineInView ? "translateY(0px)" : "translateY(20px)",
+    config: { tension: 120, friction: 14 },
+  });
 
-  const [educationTimelineStyle, educationTimelineApi] = useSpring(() => ({
-    opacity: 0,
-    transform: "translateY(20px)",
-    config: {
-      tension: 120,
-      friction: 14,
-      duration: 1000,
-    },
-  }));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === resumeTitleRef.current && entry.isIntersecting) {
-            resumeTitleApi.start({ opacity: 1, transform: "translateY(0px)" });
-          }
-          if (
-            entry.target === workTimelineRef.current &&
-            entry.isIntersecting
-          ) {
-            workTimelineApi.start({ opacity: 1, transform: "translateY(0px)" });
-          }
-          if (
-            entry.target === educationTimelineRef.current &&
-            entry.isIntersecting
-          ) {
-            educationTimelineApi.start({
-              opacity: 1,
-              transform: "translateY(0px)",
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.5,
-      }
-    );
-
-    if (resumeTitleRef.current) observer.observe(resumeTitleRef.current);
-    if (workTimelineRef.current) observer.observe(workTimelineRef.current);
-    if (educationTimelineRef.current)
-      observer.observe(educationTimelineRef.current);
-
-    return () => {
-      if (resumeTitleRef.current) observer.unobserve(resumeTitleRef.current);
-      if (workTimelineRef.current) observer.unobserve(workTimelineRef.current);
-      if (educationTimelineRef.current)
-        observer.unobserve(educationTimelineRef.current);
-    };
-  }, [resumeTitleApi, workTimelineApi, educationTimelineApi]);
+  // Animation for the education timeline
+  const educationTimelineStyle = useSpring({
+    opacity: educationTimelineInView ? 1 : 0,
+    transform: educationTimelineInView ? "translateY(0px)" : "translateY(20px)",
+    config: { tension: 120, friction: 14 },
+  });
 
   return (
     <div className="py-28 mx-auto font-mono relative overflow-hidden">
-      <div className=" line  w-[100%] h-[1px] border-r-[1px] bg-[#4d4d4d75] absolute top-[70%] rotate-90"></div>
-
       <animated.div
         className="text-center leading-loose font-normal text-4xl text-black mb-32"
         style={resumeTitleStyle}
@@ -92,13 +46,14 @@ export default function Resume() {
       </animated.div>
 
       <div className="relative py-5 mb-2 text-center">
-        <h3 className="inline-block px-4 py-2 text-sm uppercase tracking-widest font-bold bg-gray-200 rounded">
+        <h3 className="inline-block px-4 py-2 text-sm uppercase tracking-widest font-bold bg-gray-200 rounded relative">
           Work Experience
+          <div className="line w-[600px] h-[1px] border-r-[1px] bg-[#4d4d4d75] absolute rotate-90 left-1/2 -translate-x-1/2 top-[335px]"></div>
         </h3>
       </div>
 
       <animated.ul
-        className="relative py-5 list-none m-0  "
+        className="relative py-5 list-none m-0"
         style={workTimelineStyle}
         ref={workTimelineRef}
       >
@@ -157,8 +112,9 @@ export default function Resume() {
       </animated.ul>
 
       <div className="relative py-5 mb-2 text-center">
-        <h3 className="inline-block px-4 py-2 text-sm uppercase tracking-widest font-bold bg-gray-200 rounded">
+        <h3 className="inline-block px-4 py-2 text-sm uppercase tracking-widest font-bold bg-gray-200 rounded relative">
           Education
+          <div className="line w-[600px] h-[1px] border-r-[1px] bg-[#4d4d4d75] absolute rotate-90 left-1/2 -translate-x-1/2 top-[335px]"></div>
         </h3>
       </div>
 

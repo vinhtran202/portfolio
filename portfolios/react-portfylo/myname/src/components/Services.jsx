@@ -6,11 +6,31 @@ import {
 import { PiPaintBrushBroadThin } from "react-icons/pi";
 import { RiMenuSearchLine } from "react-icons/ri";
 import { TfiBarChart } from "react-icons/tfi";
+import { useSpring, animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 export default function Services() {
+  const { ref, inView } = useInView({
+    threshold: 0.5, // trigger animation when 50% of the component is in view
+  });
+
+  const [styles, api] = useSpring(() => ({
+    opacity: 0,
+    x: -100,
+    config: { duration: 1000 },
+  }));
+
+  useEffect(() => {
+    if (inView) {
+      api.start({ opacity: 1, x: 0 });
+    } else {
+      api.start({ opacity: 0, x: -100 });
+    }
+  }, [inView, api]);
   return (
     <>
-      <section className="bg-[#ff9000] ">
+      <animated.section ref={ref} style={styles} className="bg-[#ff9000]">
         <div className="container mx-auto px-4 py-28 text-center w-[1170px]">
           <div className="mb-32">
             <h1 className="text-4xl font-normal text-white font-mono">
@@ -86,7 +106,7 @@ export default function Services() {
             </div>
           </div>
         </div>
-      </section>
+      </animated.section>
     </>
   );
 }

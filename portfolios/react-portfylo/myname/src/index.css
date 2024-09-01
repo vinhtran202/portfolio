@@ -17,3 +17,8 @@
 body {
   font-family: "Space Mono", Arial, serif;
 }
+
+::selection {
+  background: #ff9000;
+  color: #fff;
+}

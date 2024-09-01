@@ -1,71 +1,31 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGlobe } from "react-icons/fa";
-import { useEffect, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
 
 export default function About() {
-  const aboutRef = useRef(null);
-  const h1Ref = useRef(null);
-  const boxRef = useRef(null);
+  const { ref: h1Ref, inView: h1InView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the element is visible
+  });
+  const { ref: boxRef, inView: boxInView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the element is visible
+  });
 
-  const [h1Style, h1Api] = useSpring(() => ({
-    opacity: 0,
-    transform: "translateY(20px)",
-    config: {
-      tension: 120,
-      friction: 14,
-      duration: 1000,
-    },
-  }));
+  // Animation for the heading
+  const h1Style = useSpring({
+    opacity: h1InView ? 1 : 0,
+    transform: h1InView ? "translateY(0px)" : "translateY(20px)",
+    config: { tension: 120, friction: 14 },
+  });
 
-  const [boxStyle, boxApi] = useSpring(() => ({
-    opacity: 0,
-    transform: "translateY(20px)",
-    config: {
-      tension: 120,
-      friction: 14,
-      duration: 1000,
-    },
-  }));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === h1Ref.current && entry.isIntersecting) {
-            h1Api.start({ opacity: 1, transform: "translateY(0px)" });
-          }
-          if (entry.target === boxRef.current && entry.isIntersecting) {
-            boxApi.start({ opacity: 1, transform: "translateY(0px)" });
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Ít nhất 50% phần tử phải xuất hiện trong viewport để kích hoạt
-      }
-    );
-
-    if (h1Ref.current) {
-      observer.observe(h1Ref.current);
-    }
-    if (boxRef.current) {
-      observer.observe(boxRef.current);
-    }
-
-    return () => {
-      if (h1Ref.current) {
-        observer.unobserve(h1Ref.current);
-      }
-      if (boxRef.current) {
-        observer.unobserve(boxRef.current);
-      }
-    };
-  }, [h1Api, boxApi]);
+  // Animation for the content box
+  const boxStyle = useSpring({
+    opacity: boxInView ? 1 : 0,
+    transform: boxInView ? "translateY(0px)" : "translateY(20px)",
+    config: { tension: 120, friction: 14 },
+  });
 
   return (
-    <div
-      className="w-full h-screen bg-white text-black font-mono font-normal py-28"
-      ref={aboutRef}
-    >
+    <div className="w-full h-screen bg-white text-black font-mono font-normal py-28">
       <animated.h1
         className="text-center text-4xl leading-snug font-normal mb-24"
         style={h1Style}
